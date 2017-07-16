@@ -37,8 +37,19 @@ d3.json('ufodata.json',function(error, data){
 				return point;
 			};
 
-			var dots = d3.selectAll('div').append("svg").attr('width', 1000).attr("height", 600);
+			var dots = d3.selectAll('div').append("canvas").attr('width', 1000).attr("height", 600);
+			var ctx = d3.selectAll('canvas').node().getContext("2d");
+			ctx.fillStyle = "#e61112";
+			ctx.strokeStyle = "none";
+			points.forEach(function(elem){
+				ctx.globalAlpha= 0.2;
+				ctx.beginPath();
+				ctx.arc(elem.x,elem.y,2,0,2*Math.PI);
+				ctx.stroke();
+				ctx.fill();
 
+			})
+			/*
 			var circle = dots.selectAll("circle")
 				.data(points)
 				.enter()
@@ -47,6 +58,7 @@ d3.json('ufodata.json',function(error, data){
 				.attr("cx", function(d){return d.x;})
 				.attr("cy", function(d){return d.y;})
 				.attr("class","dot");
+				*/
 		};
 
 	};
